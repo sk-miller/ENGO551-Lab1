@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+{% block content %}
+    <!-- Book Details -->
+    <h2>{{ book.title }}</h2>
+    <p>Author: {{ book.author }}</p>
+    <p>Publication Year: {{ book.year }}</p>
+    <p>ISBN: {{ book.isbn }}</p>
+
+    <!-- Display Google Books Information -->
+    {% if google_books_info %}
+        <h3>Google Books Information:</h3>
+        <ul>
+            {% for info in google_books_info %}
+                <li><strong>Title:</strong> {{ info.title }}</li>
+                <li><strong>Authors:</strong> {{ info.authors|join(', ') }}</li>
+                <li><strong>Average Rating:</strong> {{ info.average_rating }}</li>
+                <li><strong>Ratings Count:</strong> {{ info.ratings_count }}</li>
+                <li><strong>Description:</strong> {{ info.description }}</li>
+                {% if book.thumbnail %}
+                    <img src="{{ book.thumbnail }}" alt="Book Thumbnail">
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No Google Books information available.</p>
+    {% endif %}
+
+    <!-- Rating System and Review Submission Form -->
+    <h3>Rate and Review</h3>
+    <form method="POST" action="{{ url_for('submit_review', isbn=book.isbn) }}">
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" name="rating" id="rating" min="1" max="5" required>
+
+        <label for="comment">Review:</label>
+        <textarea name="comment" id="comment" rows="4" cols="50" placeholder="Write your review here" required></textarea>
+
+        <button type="submit">Submit Review</button>
+    </form>
+    
+    <!-- Display Reviews -->
+    {% if book.reviews %}
+        <h3>Reviews:</h3>
+        <ul>
+            {% for review in book.reviews %}
+                <li>{{ review.rating }}/5 - {{ review.comment }} (by {{ review.user.username }})</li>
+            {% endfor %}
+            <li><strong>Average Rating:</strong> {{ average_user_rating|default('N/A') }}</li>
+        </ul>
+    {% else %}
+        <p>No reviews available.</p>
+    {% endif %}
+{% endblock %}
+<a href="{{ url_for('search') }}"><button type="button">Back to Search</button></a>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</html>

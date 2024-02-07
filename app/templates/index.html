@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Review Site</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Book Review Site</h1>
+        <p>Discover, share, and discuss your favorite books!</p>
+    </header>
+
+    <main>
+        
+        <section>
+            <h2>Latest Reviews</h2>
+            <p>Check out the latest reviews from our community. Share your thoughts and recommendations with fellow book lovers!</p>
+        </section>
+
+        <section>
+            <h2>Join the Community</h2>
+            <p>Ready to share your own reviews and connect with other readers? Join our community today!</p>
+            <a href="/register"><button>Register Now</button></a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Book Review Site. All rights reserved.</p>
+    </footer>
+</body>
+</html>

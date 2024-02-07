@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <!-- Login Form -->
+    <form action="/login" method="post">
+        <label for="login_username">Username:</label>
+        <input type="text" id="login_username" name="login_username" required>
+        
+        <label for="login_password">Password:</label>
+        <input type="password" id="login_password" name="login_password" required>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <hr>
+
+    <!-- Registration Form -->
+    <form action="/register" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}
