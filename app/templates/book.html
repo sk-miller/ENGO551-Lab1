@@ -22,6 +22,9 @@
             {% for info in google_books_info %}
                 <li><strong>Title:</strong> {{ info.title }}</li>
                 <li><strong>Authors:</strong> {{ info.authors|join(', ') }}</li>
+                <li><strong>Published Date:</strong> {{ info.publish_date }}</li>
+                <li><strong>ISBN 10:</strong> {{ info.isbn_10 }}</li>
+                <li><strong>ISBN 13:</strong> {{ info.isbn_13 }}</li>
                 <li><strong>Average Rating:</strong> {{ info.average_rating }}</li>
                 <li><strong>Ratings Count:</strong> {{ info.ratings_count }}</li>
                 <li><strong>Description:</strong> {{ info.description }}</li>
